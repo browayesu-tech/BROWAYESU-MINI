@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BROWAYESU-MINI | Welcome</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00f2ff;
+      --secondary: #0062ff;
+      --accent: #25d366;
+      --bg: #030712;
+      --glass: rgba(15, 23, 42, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --grad-1: rgba(0, 98, 255, 0.15);
+      --grad-2: rgba(0, 242, 255, 0.1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --glass: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --text: #0f172a;
+      --text-dim: #64748b;
+      --grad-1: rgba(0, 98, 255, 0.1);
+      --grad-2: rgba(0, 242, 255, 0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, var(--grad-1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, var(--grad-2) 0px, transparent 50%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .glass-panel {
+      position: relative;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--primary);
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover { transform: rotate(15deg) scale(1.1); background: rgba(0, 242, 255, 0.1); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .brand h1 { font-size: 1.8rem; color: var(--primary); letter-spacing: 1px; margin-bottom: 8px; }
+    .brand p { font-size: 0.9rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+
+    .language-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      padding: 12px;
+      border-radius: 12px;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .lang-btn:hover {
+      background: rgba(0, 242, 255, 0.1);
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+
+    #pairing-interface { display: none; }
+
+    .input-group { margin-top: 25px; }
+    .input-group label { display: block; margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dim); }
+    
+    input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      padding: 16px 20px;
+      border-radius: 16px;
+      color: var(--text);
+      font-size: 1.1rem;
+      outline: none;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+
+    #local-time-display {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: var(--primary);
+      text-align: center;
+      min-height: 1.2rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+
+    .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 98, 255, 0.4); }
+
+    .pair-result {
+      margin-top: 30px;
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 242, 255, 0.1);
+      border: 1px dashed var(--primary);
+      border-radius: 20px;
+      display: none;
+    }
+
+    .pair-code { 
+      font-size: 2.2rem; 
+      font-weight: 800; 
+      color: var(--primary); 
+      cursor: pointer; 
+      letter-spacing: 6px; 
+      margin: 10px 0;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass-panel">
+    <div class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-moon" id="theme-icon"></i>
+    </div>
+
+    <!-- Language Selection Screen -->
+    <div id="language-screen">
+      <div class="brand">
+        <h1>BROWAYESU-MINI</h1>
+        <p>Select your language</p>
+      </div>
+      <div class="language-grid">
+        <button class="lang-btn" onclick="selectLang('en')">🇺🇸 English</button>
+        <button class="lang-btn" onclick="selectLang('es')">🇪🇸 Español</button>
+        <button class="lang-btn" onclick="selectLang('fr')">🇫🇷 Français</button>
+        <button class="lang-btn" onclick="selectLang('pt')">🇵🇹 Português</button>
+        <button class="lang-btn" onclick="selectLang('ar')">🇸🇦 العربية</button>
+        <button class="lang-btn" onclick="selectLang('hi')">🇮🇳 हिन्दी</button>
+        <button class="lang-btn" onclick="selectLang('sw')">🇰🇪 Kiswahili</button>
+        <button class="lang-btn" onclick="selectLang('ja')">🇯🇵 日本語</button>
+        <button class="lang-btn" onclick="selectLang('ru')">🇷🇺 Русский</button>
+        <button class="lang-btn" onclick="selectLang('de')">🇩🇪 Deutsch</button>
+      </div>
+      <div class="footer">
+        BROWAYESU-MINI &copy; 2026
+      </div>
+    </div>
+
+    <!-- Pairing Interface -->
+    <div id="pairing-interface">
+      <div class="brand">
+        <h1>BROWAYESU-MINI</h1>
+        <p id="powered-by">Powered by BROWAYESU</p>
+      </div>
+      
+      <div class="input-group">
+        <label id="input-label"><i class="fas fa-phone"></i> Enter WhatsApp Number</label>
+        <input type="number" id="number" placeholder="254746432359" oninput="detectTimezone()">
+      </div>
+
+      <div id="local-time-display">
+        <span id="time-content" style="display: none;">
+          <i class="fas fa-clock"></i> <span id="country-name"></span> <span id="time-prefix">Time:</span> <span id="country-time"></span>
+        </span>
+      </div>
+      
+      <button class="btn btn-primary" id="codeBtn" onclick="showPairing('code')">
+        <i class="fas fa-keyboard"></i> Use Pairing Code
+      </button>
+      <button class="btn btn-primary" id="qrBtn" onclick="showPairing('qr')">
+        <i class="fas fa-qrcode"></i> Use QR Code
+      </button>
+
+      <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+        <i class="fas fa-spinner fa-spin"></i> <span id="loading-text">Generating...</span>
+      </div>
+
+      <!-- Pairing Code Result -->
+      <div class="pair-result" id="pairResult">
+        <p id="result-label" style="font-size: 0.9rem; color: var(--text-dim);">Your Pairing Code:</p>
+        <div class="pair-code" id="pairCode" onclick="copyCode()">--------</div>
+      </div>
+
+      <!-- QR Code Result -->
+      <div class="pair-result" id="qrResult">
+        <p id="qr-label" style="font-size: 0.9rem; color: var(--text-dim);">Scan QR Code:</p>
+        <div id="qrCode" style="margin: 15px 0;"></div>
+      </div>
+      <div class="footer" id="dynamic-footer">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+          <a href="https://wa.me/qr/3I5EUFQ755GEF1" target="_blank" style="color: var(--primary); font-size: 0.9rem; text-decoration: none;">
+            <i class="fab fa-whatsapp"></i> <span id="contact-owner">Contact Owner</span>
+          </a>
+          <span style="color: var(--text-dim);">|</span>
+          <a href="https://chat.whatsapp.com/KsAbRd8yeda4pax0PbL2vJ" target="_blank" style="color: var(--accent); font-size: 0.9rem; text-decoration: none;">
+            <i class="fas fa-users"></i> <span id="join-group">Join Group</span>
+          </a>
+        </div>
+        BROWAYESU-MINI &copy; 2026
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('theme-icon');
+      if (body.hasAttribute('data-theme')) {
+        body.removeAttribute('data-theme');
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.setAttribute('data-theme', 'light');
+      document.getElementById('theme-icon').className = 'fas fa-sun';
+    }
+
+    const translations = {
+      en: { 
+        title: "Welcome", selectLang: "Select your language", poweredBy: "Powered by BROWAYESU",
+        label: "Enter WhatsApp Number", codeBtn: "Use Pairing Code", qrBtn: "Use QR Code",
+        loading: "Generating...", result: "Your Pairing Code:", qrLabel: "Scan QR Code:",
+        contact: "Contact Owner", join: "Join Group", invalid: "Invalid number.",
+        error: "Error generating code.", serverError: "Server error.", timePrefix: "Time:", copied: "COPIED"
+      },
+      sw: { 
+        title: "Karibu", selectLang: "Chagua lugha yako", poweredBy: "Inaendeshwa na BROWAYESU",
+        label: "Weka Nambari ya WhatsApp", codeBtn: "Tumia Msimbo wa Kuoanisha", qrBtn: "Tumia Msimbo wa QR",
+        loading: "Inatengeneza...", result: "Msimbo wako wa kuoanisha:", qrLabel: "Skena Msimbo wa QR:",
+        contact: "Wasiliana na Mmiliki", join: "Jiunge na Kikundi", invalid: "Nambari isiyo sahihi.",
+        error: "Hitilafu katika kutengeneza msimbo.", serverError: "Hitilafu ya seva.", timePrefix: "Saa:", copied: "IMEIGWA"
+      },
+      es: { 
+        title: "Bienvenido", selectLang: "Selecciona tu idioma", poweredBy: "Desarrollado por BROWAYESU",
+        label: "Ingrese Número de WhatsApp", codeBtn: "Usar Código de Vinculación", qrBtn: "Usar Código QR",
+        loading: "Generando...", result: "Tu Código de Vinculación:", qrLabel: "Escanear Código QR:",
+        contact: "Contactar al Propietario", join: "Unirse al Grupo", invalid: "Número inválido.",
+        error: "Error al generar el código.", serverError: "Error del servidor.", timePrefix: "Hora:", copied: "COPIADO"
+      },
+      fr: { 
+        title: "Bienvenue", selectLang: "Choisissez votre langue", poweredBy: "Propulsé par BROWAYESU",
+        label: "Entrez le numéro WhatsApp", codeBtn: "Utiliser le code de couplage", qrBtn: "Utiliser le code QR",
+        loading: "Génération...", result: "Votre code de couplage:", qrLabel: "Scanner le code QR:",
+        contact: "Contacter le propriétaire", join: "Rejoindre le groupe", invalid: "Numéro invalide.",
+        error: "Erreur lors de la génération du code.", serverError: "Erreur serveur.", timePrefix: "Heure:", copied: "COPIÉ"
+      }
+    };
+
+    let currentLang = 'en';
+
+    function selectLang(lang) {
+      currentLang = lang;
+      const t = translations[lang] || translations['en'];
+      document.title = `BROWAYESU-MINI | ${t.title}`;
+      document.getElementById('powered-by').textContent = t.poweredBy;
+      document.getElementById('input-label').innerHTML = `<i class="fas fa-phone"></i> ${t.label}`;
+      document.getElementById('codeBtn').innerHTML = `<i class="fas fa-keyboard"></i> ${t.codeBtn}`;
+      document.getElementById('qrBtn').innerHTML = `<i class="fas fa-qrcode"></i> ${t.qrBtn}`;
+      document.getElementById('loading-text').textContent = t.loading;
+      document.getElementById('result-label').textContent = t.result;
+      document.getElementById('qr-label').textContent = t.qrLabel;
+      document.getElementById('contact-owner').textContent = t.contact;
+      document.getElementById('join-group').textContent = t.join;
+      document.getElementById('time-prefix').textContent = t.timePrefix;
+
+      document.getElementById('language-screen').style.display = 'none';
+      document.getElementById('pairing-interface').style.display = 'block';
+    }
+
+    const countryMap = {
+      "254": { name: "Kenya", tz: "Africa/Nairobi" }, "263": { name: "Zimbabwe", tz: "Africa/Harare" },
+      "234": { name: "Nigeria", tz: "Africa/Lagos" }, "255": { name: "Tanzania", tz: "Africa/Dar_es_Salaam" },
+      "256": { name: "Uganda", tz: "Africa/Kampala" }, "27": { name: "South Africa", tz: "Africa/Johannesburg" },
+      "233": { name: "Ghana", tz: "Africa/Accra" }, "20": { name: "Egypt", tz: "Africa/Cairo" },
+      "91": { name: "India", tz: "Asia/Kolkata" }, "1": { name: "USA/Canada", tz: "America/New_York" },
+      "44": { name: "UK", tz: "Europe/London" }
+    };
+
+    let activeTz = null;
+
+    function detectTimezone() {
+      const num = document.getElementById('number').value;
+      const content = document.getElementById('time-content');
+      let found = false;
+      for (const code in countryMap) {
+        if (num.startsWith(code)) {
+          document.getElementById('country-name').textContent = countryMap[code].name;
+          activeTz = countryMap[code].tz;
+          content.style.display = 'inline';
+          found = true;
+          break;
+        }
+      }
+      if (!found) { content.style.display = 'none'; activeTz = null; }
+    }
+
+    function updateClock() {
+      if (activeTz) {
+        try {
+          const now = new Date();
+          const timeStr = now.toLocaleTimeString('en-US', { timeZone: activeTz, hour12: true });
+          document.getElementById('country-time').textContent = timeStr;
+        } catch(e) {}
+      }
+    }
+    setInterval(updateClock, 1000);
+
+    async function showPairing(method) {
+      const t = translations[currentLang] || translations['en'];
+      const number = document.getElementById('number').value.replace(/[^0-9]/g, '');
+      if (number.length < 10) return alert(t.invalid);
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('pairResult').style.display = 'none';
+      document.getElementById('qrResult').style.display = 'none';
+      try {
+        if (method === 'code') {
+          const res = await fetch(`/code?number=${number}`);
+          const data = await res.json();
+          if (data.code) {
+            document.getElementById('pairCode').textContent = data.code;
+            document.getElementById('pairResult').style.display = 'block';
+          } else { alert(t.error); }
+        } else {
+          document.getElementById('qrCode').innerHTML = '';
+          new QRCode(document.getElementById("qrCode"), {
+            text: `https://web.whatsapp.com/${number}`,
+            width: 200, height: 200
+          });
+          document.getElementById('qrResult').style.display = 'block';
+        }
+      } catch (e) { alert(t.serverError); }
+      finally { document.getElementById('loading').style.display = 'none'; }
+    }
+
+    function copyCode() {
+      const code = document.getElementById('pairCode').textContent;
+      navigator.clipboard.writeText(code);
+      document.getElementById('pairCode').textContent = (translations[currentLang] || translations['en']).copied;
+      setTimeout(() => document.getElementById('pairCode').textContent = code, 1000);
+    }
+  </script>
+</body>
+</html>
